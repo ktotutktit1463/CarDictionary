@@ -8,9 +8,31 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SelectViewActivity" >
 
-    <TextView
+    <Spinner
+        android:id="@+id/spinner2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_below="@+id/spinner1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:entries="@array/type" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spinner2"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
+        android:entries="@array/maker" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:text="Search" />
 
 </RelativeLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+<string-array name="maker">  
+ <item>toyota</item>
+ <item>mazda</item>
+ <item>honda</item>
+ <item>subaru</item>
+</string-array>
+
+<string-array name="type">  
+ <item>sedan</item>
+ <item>wagon</item>
+ <item>sport</item>
+</string-array>
+    
+</resources>
