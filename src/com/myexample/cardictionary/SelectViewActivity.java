@@ -2,7 +2,9 @@ package com.myexample.cardictionary;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
@@ -47,6 +49,13 @@ public class SelectViewActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.select_view, menu);
 		return true;
+	}
+	
+	/* Searchボタンクリック時に呼び出されるメソッド */
+	public void OnClick(View v) {
+		Intent intent = new Intent(SelectViewActivity.this, ListViewActivity.class);
+		
+		startActivity(intent);
 	}
 
 }
