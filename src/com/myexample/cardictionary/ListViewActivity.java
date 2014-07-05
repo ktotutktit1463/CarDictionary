@@ -5,18 +5,23 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class ListViewActivity extends Activity {
+	
+	private String SelectedMaker;
+	private String SelectedType;
 
 	/* ListViewに表示する要素のクラス */
 	private class ListViewItem {
@@ -68,6 +73,10 @@ public class ListViewActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		Intent intent = getIntent();
+		SelectedMaker = intent.getStringExtra("Maker");
+		SelectedType = intent.getStringExtra("Type");
+		
 		setContentView(R.layout.listview);
 		
 		// ListViewに表示する要素を作成する
@@ -82,6 +91,18 @@ public class ListViewActivity extends Activity {
 		
 		listView.setAdapter(adapter);
 		
+		listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				ListView listView = (ListView)parent;
+				ListViewItem item = (ListViewItem)listView.getItemAtPosition(position);
+				
+				Intent intent = new Intent(ListViewActivity.this, ImageViewActivity.class);
+				intent.putExtra( "resourceID", item.getResourceID() );
+				
+				startActivity(intent);
+			}
+		});
 	}
 
 }
