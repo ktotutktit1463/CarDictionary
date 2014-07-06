@@ -1,11 +1,18 @@
 package com.myexample.cardictionary;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -79,11 +86,37 @@ public class ListViewActivity extends Activity {
 		
 		setContentView(R.layout.listview);
 		
+		AssetManager as = getResources().getAssets();
+		InputStream is = null;
+		BufferedReader br = null;
+		
+		List<ListViewItem> list = new ArrayList<ListViewItem>();
+		
+		try {
+			is = as.open("cardata.csv");
+			br = new BufferedReader( new InputStreamReader(is) );
+			
+			String line;
+			while ( (line = br.readLine()) != null ) {
+				String str[] = line.split(",");
+				int strId = getResources().getIdentifier(str[0], "drawable", getPackageName() );
+				list.add( new ListViewItem(strId, str[0] + ".jpg", BitmapFactory.decodeResource(getResources(), strId)) );
+			}
+			
+			br.close();
+		} catch (IOException e) {
+		}
+		
+		
+		/*
 		// ListViewÇ…ï\é¶Ç∑ÇÈóvëfÇçÏê¨Ç∑ÇÈ
 		List<ListViewItem> list = new ArrayList<ListViewItem>();
 		list.add( new ListViewItem(R.drawable.prius, "prius.jpg", BitmapFactory.decodeResource(getResources(), R.drawable.prius) ));
 		list.add( new ListViewItem(R.drawable.bents, "bents.jpg", BitmapFactory.decodeResource(getResources(), R.drawable.bents) ));
 		list.add( new ListViewItem(R.drawable.mazda, "mazda.jpg", BitmapFactory.decodeResource(getResources(), R.drawable.mazda) ));
+		list.add( new ListViewItem(R.drawable.fit, "fit.jpg", BitmapFactory.decodeResource(getResources(), R.drawable.fit) ));
+		list.add( new ListViewItem(R.drawable.insight, "insight.jpg", BitmapFactory.decodeResource(getResources(), R.drawable.insight) ));
+		*/
 		
 		ListViewItemAdapter adapter = new ListViewItemAdapter(this, 0, list);
 		

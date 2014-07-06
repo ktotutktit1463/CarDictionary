@@ -7,7 +7,7 @@
     
     <ImageView 
         android:id="@+id/imageView_Item"
-        android:layout_width="wrap_content"
+        android:layout_width="50dip"
         android:layout_height="120dip"
         android:adjustViewBounds="true" />
     

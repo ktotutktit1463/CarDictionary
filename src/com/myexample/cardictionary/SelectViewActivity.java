@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 public class SelectViewActivity extends Activity {
 	
@@ -26,24 +25,24 @@ public class SelectViewActivity extends Activity {
         
         spinner1.setOnItemSelectedListener(new OnItemSelectedListener(){  
             //Spinnerのドロップダウンアイテムが選択された時  
-            public void onItemSelected(AdapterView parent, android.view.View view, int arg2, long arg3) {  
+            public void onItemSelected(AdapterView<?> parent, View view, int arg2, long arg3) {  
                 Spinner spinner = (Spinner)parent;  
                 SelectedMaker = (String)spinner.getSelectedItem();  
                 //Toast.makeText(SelectViewActivity.this, item, Toast.LENGTH_LONG).show();  
             }  
             //Spinnerのドロップダウンアイテムが選択されなかった時  
-            public void onNothingSelected(AdapterView parent) {  
+            public void onNothingSelected(AdapterView<?> parent) {  
             }});
         
         spinner2.setOnItemSelectedListener(new OnItemSelectedListener(){  
             //Spinnerのドロップダウンアイテムが選択された時  
-            public void onItemSelected(AdapterView parent, android.view.View view, int arg2, long arg3) {  
+            public void onItemSelected(AdapterView<?> parent, View view, int arg2, long arg3) {  
                 Spinner spinner = (Spinner)parent;  
                 SelectedType = (String)spinner.getSelectedItem();  
                 //Toast.makeText(SelectViewActivity.this, item, Toast.LENGTH_LONG).show();  
             }  
             //Spinnerのドロップダウンアイテムが選択されなかった時  
-            public void onNothingSelected(AdapterView parent) {  
+            public void onNothingSelected(AdapterView<?> parent) {  
             }});  
 	}
 

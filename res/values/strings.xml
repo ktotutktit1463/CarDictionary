@@ -3,6 +3,8 @@
 
     <string name="app_name">CarDictionary</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="Search">Search</string>
+    <string name="maker">メーカー</string>
+    <string name="type">車種</string>
 
 </resources>

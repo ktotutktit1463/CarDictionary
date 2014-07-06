@@ -10,8 +10,8 @@
 
 <string-array name="type">  
  <item>sedan</item>
- <item>wagon</item>
- <item>sport</item>
+ <item>hybrid</item>
+ <item>compact</item>
 </string-array>
     
 </resources>
