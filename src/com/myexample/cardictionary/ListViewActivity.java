@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ListViewActivity extends Activity {
 	
@@ -33,17 +34,17 @@ public class ListViewActivity extends Activity {
 	/* ListViewに表示する要素のクラス */
 	private class ListViewItem {
 		private int resourceID;
-		private String fileName;
+		private String Name;
 		private Bitmap img;
 		
-		public ListViewItem(int resource_id, String file_name, Bitmap img) {
+		public ListViewItem(int resource_id, String name, Bitmap img) {
 			this.resourceID = resource_id;
-			this.fileName = file_name;
+			this.Name = name;
 			this.img = img;
 		}
 		
 		public int getResourceID() { return resourceID; }
-		public String getFileName() { return fileName; }
+		public String getName() { return Name; }
 		public Bitmap getImage() { return img; }
 	}
 	
@@ -70,7 +71,7 @@ public class ListViewActivity extends Activity {
 			imageView.setImageBitmap( item.getImage() );
 			
 			TextView textView = (TextView)convertView.findViewById(R.id.textView_Item);
-			textView.setText( item.getFileName() );
+			textView.setText( item.getName() );
 			
 			return convertView;
 		}
@@ -84,29 +85,31 @@ public class ListViewActivity extends Activity {
 		SelectedMaker = intent.getStringExtra("Maker");
 		SelectedType = intent.getStringExtra("Type");
 		
+		Toast.makeText(this, SelectedMaker, Toast.LENGTH_LONG).show();
+		
 		setContentView(R.layout.listview);
 		
 		AssetManager as = getResources().getAssets();
-		InputStream is = null;
-		BufferedReader br = null;
 		
 		List<ListViewItem> list = new ArrayList<ListViewItem>();
 		
 		try {
-			is = as.open("cardata.csv");
-			br = new BufferedReader( new InputStreamReader(is) );
+			InputStream is = as.open("cardata.csv");
+			BufferedReader br = new BufferedReader( new InputStreamReader(is,"Shift_JIS") );
 			
 			String line;
 			while ( (line = br.readLine()) != null ) {
 				String str[] = line.split(",");
-				int strId = getResources().getIdentifier(str[0], "drawable", getPackageName() );
-				list.add( new ListViewItem(strId, str[0] + ".jpg", BitmapFactory.decodeResource(getResources(), strId)) );
+				
+				if ( str[2].equalsIgnoreCase(SelectedMaker) ) {
+					int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
+					list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId)) );
+				}
 			}
 			
 			br.close();
 		} catch (IOException e) {
 		}
-		
 		
 		/*
 		// ListViewに表示する要素を作成する
@@ -115,7 +118,7 @@ public class ListViewActivity extends Activity {
 		list.add( new ListViewItem(R.drawable.bents, "bents.jpg", BitmapFactory.decodeResource(getResources(), R.drawable.bents) ));
 		list.add( new ListViewItem(R.drawable.mazda, "mazda.jpg", BitmapFactory.decodeResource(getResources(), R.drawable.mazda) ));
 		list.add( new ListViewItem(R.drawable.fit, "fit.jpg", BitmapFactory.decodeResource(getResources(), R.drawable.fit) ));
-		list.add( new ListViewItem(R.drawable.insight, "insight.jpg", BitmapFactory.decodeResource(getResources(), R.drawable.insight) ));
+		list.add( new ListViewItem(R.drawable.insight, "インサイト", BitmapFactory.decodeResource(getResources(), R.drawable.insight) ));
 		*/
 		
 		ListViewItemAdapter adapter = new ListViewItemAdapter(this, 0, list);

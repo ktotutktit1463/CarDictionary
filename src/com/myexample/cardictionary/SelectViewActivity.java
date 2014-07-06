@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class SelectViewActivity extends Activity {
 	
@@ -28,7 +29,7 @@ public class SelectViewActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int arg2, long arg3) {  
                 Spinner spinner = (Spinner)parent;  
                 SelectedMaker = (String)spinner.getSelectedItem();  
-                //Toast.makeText(SelectViewActivity.this, item, Toast.LENGTH_LONG).show();  
+                Toast.makeText(SelectViewActivity.this, SelectedMaker, Toast.LENGTH_LONG).show();  
             }  
             //Spinnerのドロップダウンアイテムが選択されなかった時  
             public void onNothingSelected(AdapterView<?> parent) {  
@@ -39,7 +40,7 @@ public class SelectViewActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int arg2, long arg3) {  
                 Spinner spinner = (Spinner)parent;  
                 SelectedType = (String)spinner.getSelectedItem();  
-                //Toast.makeText(SelectViewActivity.this, item, Toast.LENGTH_LONG).show();  
+                Toast.makeText(SelectViewActivity.this, SelectedType, Toast.LENGTH_LONG).show();  
             }  
             //Spinnerのドロップダウンアイテムが選択されなかった時  
             public void onNothingSelected(AdapterView<?> parent) {  
@@ -56,7 +57,7 @@ public class SelectViewActivity extends Activity {
 	/* Searchボタンクリック時に呼び出されるメソッド */
 	public void OnClick(View v) {
 		Intent intent = new Intent(SelectViewActivity.this, ListViewActivity.class);
-		intent.putExtra("maker", SelectedMaker);
+		intent.putExtra("Maker", SelectedMaker);
 		intent.putExtra("Type", SelectedType);
 		
 		startActivity(intent);
