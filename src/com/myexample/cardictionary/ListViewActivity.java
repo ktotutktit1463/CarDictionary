@@ -11,8 +11,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -24,7 +22,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ListViewActivity extends Activity {
 	
@@ -85,28 +82,49 @@ public class ListViewActivity extends Activity {
 		SelectedMaker = intent.getStringExtra("Maker");
 		SelectedType = intent.getStringExtra("Type");
 		
-		Toast.makeText(this, SelectedMaker, Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, SelectedMaker, Toast.LENGTH_LONG).show();
 		
 		setContentView(R.layout.listview);
 		
+		// listviewに表示する要素をassetsのcardata.csvから取得する
 		AssetManager as = getResources().getAssets();
-		
 		List<ListViewItem> list = new ArrayList<ListViewItem>();
-		
 		try {
 			InputStream is = as.open("cardata.csv");
 			BufferedReader br = new BufferedReader( new InputStreamReader(is,"Shift_JIS") );
 			
 			String line;
+			// cardata.csvの内容を1行ずつ読み込む
 			while ( (line = br.readLine()) != null ) {
 				String str[] = line.split(",");
 				
-				if ( str[2].equalsIgnoreCase(SelectedMaker) ) {
+				// 選択されたメーカーとタイプが「選択なし」の場合　csvの全てをlistにセット
+				if ( SelectedMaker.equalsIgnoreCase("---") & SelectedType.equalsIgnoreCase("---") ){
 					int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
 					list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId)) );
 				}
+				// 選択されたメーカーだけが「選択なし」の場合 選択されたタイプに合うものだけをリストにセット
+				else if ( SelectedMaker.equalsIgnoreCase("---") ) {
+					if ( SelectedType.equalsIgnoreCase(str[3]) ) {
+						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
+						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId)) );
+					}
+				}
+				// 選択されたタイプだけが「選択なし」の場合 選択されたメーカーに合うものだけをリストにセット
+				else if ( SelectedType.equalsIgnoreCase("---") ) {
+					if ( SelectedMaker.equalsIgnoreCase(str[2]) ) {
+						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
+						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId)) );
+					}
+				}
+				// メーカーもタイプも指定されている場合、両方に合ったものをリストにセット
+				else {
+					if ( SelectedMaker.equalsIgnoreCase(str[2]) & SelectedType.equalsIgnoreCase(str[3]) ) {
+						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
+						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId)) );
+					}
+				}
 			}
-			
 			br.close();
 		} catch (IOException e) {
 		}
