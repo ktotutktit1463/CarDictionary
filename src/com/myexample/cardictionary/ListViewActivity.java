@@ -33,16 +33,19 @@ public class ListViewActivity extends Activity {
 		private int resourceID;
 		private String Name;
 		private Bitmap img;
+		private String description;
 		
-		public ListViewItem(int resource_id, String name, Bitmap img) {
+		public ListViewItem(int resource_id, String name, Bitmap img, String description) {
 			this.resourceID = resource_id;
 			this.Name = name;
 			this.img = img;
+			this.description = description;
 		}
 		
 		public int getResourceID() { return resourceID; }
 		public String getName() { return Name; }
 		public Bitmap getImage() { return img; }
+		public String getDescription() { return description; }
 	}
 	
 	/* ListViewにセットするアダプタのクラス */
@@ -67,8 +70,11 @@ public class ListViewActivity extends Activity {
 			ImageView imageView = (ImageView)convertView.findViewById(R.id.imageView_Item);
 			imageView.setImageBitmap( item.getImage() );
 			
-			TextView textView = (TextView)convertView.findViewById(R.id.textView_Item);
-			textView.setText( item.getName() );
+			TextView textView_name = (TextView)convertView.findViewById(R.id.textView_Name);
+			textView_name.setText( item.getName() );
+			
+			TextView textView_description = (TextView)convertView.findViewById(R.id.textView_description);
+			textView_description.setText( item.getDescription() );
 			
 			return convertView;
 		}
@@ -102,27 +108,27 @@ public class ListViewActivity extends Activity {
 				// 選択されたメーカーとタイプが「選択なし」の場合　csvの全てをlistにセット
 				if ( SelectedMaker.equalsIgnoreCase("---") & SelectedType.equalsIgnoreCase("---") ){
 					int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-					list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId)) );
+					list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
 				}
 				// 選択されたメーカーだけが「選択なし」の場合 選択されたタイプに合うものだけをリストにセット
 				else if ( SelectedMaker.equalsIgnoreCase("---") ) {
 					if ( SelectedType.equalsIgnoreCase(type[0]) || SelectedType.equalsIgnoreCase(type[1]) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId)) );
+						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
 					}
 				}
 				// 選択されたタイプだけが「選択なし」の場合 選択されたメーカーに合うものだけをリストにセット
 				else if ( SelectedType.equalsIgnoreCase("---") ) {
 					if ( SelectedMaker.equalsIgnoreCase(str[2]) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId)) );
+						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
 					}
 				}
 				// メーカーもタイプも指定されている場合、両方に合ったものをリストにセット
 				else {
 					if ( SelectedMaker.equalsIgnoreCase(str[2]) & (SelectedType.equalsIgnoreCase(type[0]) || SelectedType.equalsIgnoreCase(type[1])) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId)) );
+						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
 					}
 				}
 			}
