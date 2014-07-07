@@ -6,5 +6,7 @@
     <string name="Search">Search</string>
     <string name="maker">メーカー</string>
     <string name="type">車種</string>
+    <string name="test_text">コンパクトだけど、堂々としている。大胆さのなかにも、どこか繊細さを感じる。デザインしたのは、これからのコンパクトカーの基準となるあたらしさと、長くつきあうクルマとしての親しみやすさです。</string>
+    <string name="image_description">image in drawable</string>
 
 </resources>

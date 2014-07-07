@@ -97,6 +97,7 @@ public class ListViewActivity extends Activity {
 			// cardata.csvの内容を1行ずつ読み込む
 			while ( (line = br.readLine()) != null ) {
 				String str[] = line.split(",");
+				String type[] = str[3].split("&");
 				
 				// 選択されたメーカーとタイプが「選択なし」の場合　csvの全てをlistにセット
 				if ( SelectedMaker.equalsIgnoreCase("---") & SelectedType.equalsIgnoreCase("---") ){
@@ -105,7 +106,7 @@ public class ListViewActivity extends Activity {
 				}
 				// 選択されたメーカーだけが「選択なし」の場合 選択されたタイプに合うものだけをリストにセット
 				else if ( SelectedMaker.equalsIgnoreCase("---") ) {
-					if ( SelectedType.equalsIgnoreCase(str[3]) ) {
+					if ( SelectedType.equalsIgnoreCase(type[0]) || SelectedType.equalsIgnoreCase(type[1]) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
 						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId)) );
 					}
@@ -119,7 +120,7 @@ public class ListViewActivity extends Activity {
 				}
 				// メーカーもタイプも指定されている場合、両方に合ったものをリストにセット
 				else {
-					if ( SelectedMaker.equalsIgnoreCase(str[2]) & SelectedType.equalsIgnoreCase(str[3]) ) {
+					if ( SelectedMaker.equalsIgnoreCase(str[2]) & (SelectedType.equalsIgnoreCase(type[0]) || SelectedType.equalsIgnoreCase(type[1])) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
 						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId)) );
 					}

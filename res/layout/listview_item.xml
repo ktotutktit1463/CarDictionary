@@ -9,13 +9,15 @@
         android:id="@+id/imageView_Item"
         android:layout_width="140dip"
         android:layout_height="120dip"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true"
+        android:src="@drawable/fit"
+        android:contentDescription="@string/image_description" />
     
     <TextView 
         android:id="@+id/textView_Item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dip" />
+        android:textSize="15sp" />
     
 
 </LinearLayout>
