@@ -19,29 +19,29 @@ public class SelectViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.selectview);
 		
-        // ƒXƒsƒi[‚ÌƒAƒCƒeƒ€‚ª‘I‘ğ‚³‚ê‚½‚ÉŒÄ‚Ño‚³‚ê‚éƒR[ƒ‹ƒoƒbƒNƒŠƒXƒi[‚ğ“o˜^‚µ‚Ü‚·          
+        // ï¿½Xï¿½sï¿½iï¿½[ï¿½ÌƒAï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½ÉŒÄ‚Ñoï¿½ï¿½ï¿½ï¿½ï¿½Rï¿½[ï¿½ï¿½ï¿½oï¿½bï¿½Nï¿½ï¿½ï¿½Xï¿½iï¿½[ï¿½ï¿½oï¿½^ï¿½ï¿½ï¿½Ü‚ï¿½          
         Spinner spinner1 = (Spinner)this.findViewById(R.id.spinner1);
         Spinner spinner2 = (Spinner)this.findViewById(R.id.spinner2);
         
         spinner1.setOnItemSelectedListener(new OnItemSelectedListener(){  
-            //Spinner‚Ìƒhƒƒbƒvƒ_ƒEƒ“ƒAƒCƒeƒ€‚ª‘I‘ğ‚³‚ê‚½  
+            //Spinnerï¿½Ìƒhï¿½ï¿½ï¿½bï¿½vï¿½_ï¿½Eï¿½ï¿½ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½  
             public void onItemSelected(AdapterView<?> parent, View view, int arg2, long arg3) {  
                 Spinner spinner = (Spinner)parent;  
                 SelectedMaker = (String)spinner.getSelectedItem();  
                // Toast.makeText(SelectViewActivity.this, SelectedMaker, Toast.LENGTH_LONG).show();  
             }  
-            //Spinner‚Ìƒhƒƒbƒvƒ_ƒEƒ“ƒAƒCƒeƒ€‚ª‘I‘ğ‚³‚ê‚È‚©‚Á‚½  
+            //Spinnerï¿½Ìƒhï¿½ï¿½ï¿½bï¿½vï¿½_ï¿½Eï¿½ï¿½ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
             public void onNothingSelected(AdapterView<?> parent) {  
             }});
         
         spinner2.setOnItemSelectedListener(new OnItemSelectedListener(){  
-            //Spinner‚Ìƒhƒƒbƒvƒ_ƒEƒ“ƒAƒCƒeƒ€‚ª‘I‘ğ‚³‚ê‚½  
+            //Spinnerï¿½Ìƒhï¿½ï¿½ï¿½bï¿½vï¿½_ï¿½Eï¿½ï¿½ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½  
             public void onItemSelected(AdapterView<?> parent, View view, int arg2, long arg3) {  
                 Spinner spinner = (Spinner)parent;  
                 SelectedType = (String)spinner.getSelectedItem();  
                // Toast.makeText(SelectViewActivity.this, SelectedType, Toast.LENGTH_LONG).show();  
             }  
-            //Spinner‚Ìƒhƒƒbƒvƒ_ƒEƒ“ƒAƒCƒeƒ€‚ª‘I‘ğ‚³‚ê‚È‚©‚Á‚½  
+            //Spinnerï¿½Ìƒhï¿½ï¿½ï¿½bï¿½vï¿½_ï¿½Eï¿½ï¿½ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
             public void onNothingSelected(AdapterView<?> parent) {  
             }});  
 	}
@@ -53,7 +53,7 @@ public class SelectViewActivity extends Activity {
 		return true;
 	}
 	
-	/* Searchƒ{ƒ^ƒ“ƒNƒŠƒbƒN‚ÉŒÄ‚Ño‚³‚ê‚éƒƒ\ƒbƒh */
+	/* Searchï¿½{ï¿½^ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½ÉŒÄ‚Ñoï¿½ï¿½ï¿½ï¿½éƒï¿½\ï¿½bï¿½h */
 	public void OnClick(View v) {
 		Intent intent = new Intent(SelectViewActivity.this, ListViewActivity.class);
 		intent.putExtra("Maker", SelectedMaker);

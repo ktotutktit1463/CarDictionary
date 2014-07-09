@@ -1,10 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="120dip"
+    android:layout_height="120dp"
+    android:orientation="vertical" >
     >
-    
-    <ImageView 
+
+    <ImageView
         android:id="@+id/imageView_Item"
         android:layout_width="140dip"
         android:layout_height="120dip"
@@ -15,24 +16,23 @@
     <TextView
         android:id="@+id/textView_Name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="150dp"
         android:layout_marginTop="15dp"
-        android:layout_toRightOf="@+id/imageView_Item"
+        android:layout_weight="1"
         android:text="@string/text"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView_description"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView_Name"
-        android:layout_below="@+id/textView_Name"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:layout_marginLeft="150dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="7dp"
         android:maxLines="3"
         android:text="@string/text"
         android:textSize="12sp" />
 
-</RelativeLayout>
+</LinearLayout>
