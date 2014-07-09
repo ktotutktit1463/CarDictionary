@@ -11,7 +11,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,31 +27,11 @@ public class ListViewActivity extends Activity {
 	private String SelectedMaker;
 	private String SelectedType;
 
-	/* ListViewに表示する要素のクラス */
-	private class ListViewItem {
-		private int resourceID;
-		private String Name;
-		private Bitmap img;
-		private String description;
-		
-		public ListViewItem(int resource_id, String name, Bitmap img, String description) {
-			this.resourceID = resource_id;
-			this.Name = name;
-			this.img = img;
-			this.description = description;
-		}
-		
-		public int getResourceID() { return resourceID; }
-		public String getName() { return Name; }
-		public Bitmap getImage() { return img; }
-		public String getDescription() { return description; }
-	}
-	
 	/* ListViewにセットするアダプタのクラス */
-	private class ListViewItemAdapter extends ArrayAdapter<ListViewItem> {
+	private class ListViewItemAdapter extends ArrayAdapter<CarClass> {
 		private LayoutInflater layoutInflater;
 		
-		public ListViewItemAdapter(Context context, int textViewResourceId, List<ListViewItem> objects) {
+		public ListViewItemAdapter(Context context, int textViewResourceId, List<CarClass> objects) {
 			super(context, textViewResourceId, objects);
 			layoutInflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
 		}
@@ -65,7 +44,7 @@ public class ListViewActivity extends Activity {
 				convertView = layoutInflater.inflate(R.layout.listview_item, null);
 			}
 			
-			ListViewItem item = (ListViewItem)getItem(position);
+			CarClass item = (CarClass)getItem(position);
 			
 			ImageView imageView = (ImageView)convertView.findViewById(R.id.imageView_Item);
 			imageView.setImageBitmap( item.getImage() );
@@ -94,7 +73,7 @@ public class ListViewActivity extends Activity {
 		
 		// listviewに表示する要素をassetsのcardata.csvから取得する
 		AssetManager as = getResources().getAssets();
-		List<ListViewItem> list = new ArrayList<ListViewItem>();
+		List<CarClass> list = new ArrayList<CarClass>();
 		try {
 			InputStream is = as.open("cardata.csv");
 			BufferedReader br = new BufferedReader( new InputStreamReader(is,"Shift_JIS") );
@@ -108,27 +87,27 @@ public class ListViewActivity extends Activity {
 				// 選択されたメーカーとタイプが「選択なし」の場合　csvの全てをlistにセット
 				if ( SelectedMaker.equalsIgnoreCase("---") & SelectedType.equalsIgnoreCase("---") ){
 					int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-					list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
+					list.add( new CarClass(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
 				}
 				// 選択されたメーカーだけが「選択なし」の場合 選択されたタイプに合うものだけをリストにセット
 				else if ( SelectedMaker.equalsIgnoreCase("---") ) {
 					if ( SelectedType.equalsIgnoreCase(type[0]) || SelectedType.equalsIgnoreCase(type[1]) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
+						list.add( new CarClass(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
 					}
 				}
 				// 選択されたタイプだけが「選択なし」の場合 選択されたメーカーに合うものだけをリストにセット
 				else if ( SelectedType.equalsIgnoreCase("---") ) {
 					if ( SelectedMaker.equalsIgnoreCase(str[2]) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
+						list.add( new CarClass(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
 					}
 				}
 				// メーカーもタイプも指定されている場合、両方に合ったものをリストにセット
 				else {
 					if ( SelectedMaker.equalsIgnoreCase(str[2]) & (SelectedType.equalsIgnoreCase(type[0]) || SelectedType.equalsIgnoreCase(type[1])) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-						list.add( new ListViewItem(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
+						list.add( new CarClass(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
 					}
 				}
 			}
@@ -156,7 +135,7 @@ public class ListViewActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				ListView listView = (ListView)parent;
-				ListViewItem item = (ListViewItem)listView.getItemAtPosition(position);
+				CarClass item = (CarClass)listView.getItemAtPosition(position);
 				
 				Intent intent = new Intent(ListViewActivity.this, ImageViewActivity.class);
 				intent.putExtra( "resourceID", item.getResourceID() );
