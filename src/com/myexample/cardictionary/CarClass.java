@@ -1,22 +1,21 @@
 package com.myexample.cardictionary;
 
-import android.graphics.Bitmap;
+import java.io.Serializable;
 
-public class CarClass {
+public class CarClass implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private int resourceID;
 	private String Name;
-	private Bitmap img;
 	private String description;
 	
-	public CarClass(int resource_id, String name, Bitmap img, String description) {
+	public CarClass(int resource_id, String name, String description) {
 		this.resourceID = resource_id;
 		this.Name = name;
-		this.img = img;
 		this.description = description;
 	}
 	
 	public int getResourceID() { return resourceID; }
 	public String getName() { return Name; }
-	public Bitmap getImage() { return img; }
 	public String getDescription() { return description; }
 }

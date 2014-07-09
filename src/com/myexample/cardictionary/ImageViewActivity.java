@@ -1,10 +1,10 @@
 package com.myexample.cardictionary;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ImageViewActivity extends Activity {
 
@@ -13,13 +13,18 @@ public class ImageViewActivity extends Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.imageview);
+		
+		CarClass CarItem = (CarClass)getIntent().getSerializableExtra("Car_item");
 
-		Intent intent = getIntent();
-		int resourceID = intent.getIntExtra("resourceID",0);
-
-		if (resourceID != 0) {
+		if (CarItem.getResourceID() != 0) {
 			ImageView imageView = (ImageView)findViewById(R.id.imageView_detail);
-			imageView.setImageBitmap( BitmapFactory.decodeResource(getResources(), resourceID) );
+			imageView.setImageBitmap( BitmapFactory.decodeResource(getResources(), CarItem.getResourceID()) );
+			
+			TextView textView = (TextView)findViewById(R.id.textView_detail);
+			textView.setText(CarItem.getDescription());
+			
+			TextView textView_name = (TextView)findViewById(R.id.textView_name_detail);
+			textView_name.setText(CarItem.getName());
 		}
 
 	}

@@ -47,7 +47,7 @@ public class ListViewActivity extends Activity {
 			CarClass item = (CarClass)getItem(position);
 			
 			ImageView imageView = (ImageView)convertView.findViewById(R.id.imageView_Item);
-			imageView.setImageBitmap( item.getImage() );
+			imageView.setImageBitmap( BitmapFactory.decodeResource(getResources(), item.getResourceID()) );
 			
 			TextView textView_name = (TextView)convertView.findViewById(R.id.textView_Name);
 			textView_name.setText( item.getName() );
@@ -87,27 +87,27 @@ public class ListViewActivity extends Activity {
 				// 選択されたメーカーとタイプが「選択なし」の場合　csvの全てをlistにセット
 				if ( SelectedMaker.equalsIgnoreCase("---") & SelectedType.equalsIgnoreCase("---") ){
 					int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-					list.add( new CarClass(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
+					list.add( new CarClass(strId, str[0], str[4]) );
 				}
 				// 選択されたメーカーだけが「選択なし」の場合 選択されたタイプに合うものだけをリストにセット
 				else if ( SelectedMaker.equalsIgnoreCase("---") ) {
 					if ( SelectedType.equalsIgnoreCase(type[0]) || SelectedType.equalsIgnoreCase(type[1]) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-						list.add( new CarClass(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
+						list.add( new CarClass(strId, str[0], str[4]) );
 					}
 				}
 				// 選択されたタイプだけが「選択なし」の場合 選択されたメーカーに合うものだけをリストにセット
 				else if ( SelectedType.equalsIgnoreCase("---") ) {
 					if ( SelectedMaker.equalsIgnoreCase(str[2]) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-						list.add( new CarClass(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
+						list.add( new CarClass(strId, str[0], str[4]) );
 					}
 				}
 				// メーカーもタイプも指定されている場合、両方に合ったものをリストにセット
 				else {
 					if ( SelectedMaker.equalsIgnoreCase(str[2]) & (SelectedType.equalsIgnoreCase(type[0]) || SelectedType.equalsIgnoreCase(type[1])) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-						list.add( new CarClass(strId, str[0], BitmapFactory.decodeResource(getResources(), strId), str[4]) );
+						list.add( new CarClass(strId, str[0], str[4]) );
 					}
 				}
 			}
@@ -138,7 +138,7 @@ public class ListViewActivity extends Activity {
 				CarClass item = (CarClass)listView.getItemAtPosition(position);
 				
 				Intent intent = new Intent(ListViewActivity.this, ImageViewActivity.class);
-				intent.putExtra( "resourceID", item.getResourceID() );
+				intent.putExtra( "Car_item", item );
 				
 				startActivity(intent);
 			}
