@@ -22,7 +22,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="50dp"
         android:layout_weight="1"
-        android:textSize="20sp"
-        android:text="@string/test_text" />
+        android:text="@string/test_text"
+        android:textSize="14sp" />
 
 </LinearLayout>
