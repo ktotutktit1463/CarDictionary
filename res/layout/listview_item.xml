@@ -3,36 +3,50 @@
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageView_Item"
+            android:layout_width="140dip"
+            android:layout_height="120dip"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image_description"
+            android:src="@drawable/fit" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="@string/type" />
+
+            <TextView
+                android:id="@+id/textView_description"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="4"
+                android:maxLines="3"
+                android:text="@string/test_text"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     >
 
-    <ImageView
-        android:id="@+id/imageView_Item"
-        android:layout_width="140dip"
-        android:layout_height="120dip"
-        android:adjustViewBounds="true"
-        android:src="@drawable/fit"
-        android:contentDescription="@string/image_description" />
 
-    <TextView
-        android:id="@+id/textView_Name"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="15dp"
-        android:layout_weight="1"
-        android:text="@string/text"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/textView_description"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:layout_marginLeft="150dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="7dp"
-        android:maxLines="3"
-        android:text="@string/text"
-        android:textSize="12sp" />
 
 </LinearLayout>
