@@ -23,87 +23,87 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class ListViewActivity extends Activity {
-	
+
 	private String SelectedMaker;
 	private String SelectedType;
 
-	/* ListView‚ÉƒZƒbƒg‚·‚éƒAƒ_ƒvƒ^‚ÌƒNƒ‰ƒX */
+	/* ListViewï¿½ÉƒZï¿½bï¿½gï¿½ï¿½ï¿½ï¿½Aï¿½_ï¿½vï¿½^ï¿½ÌƒNï¿½ï¿½ï¿½X */
 	private class ListViewItemAdapter extends ArrayAdapter<CarClass> {
 		private LayoutInflater layoutInflater;
-		
+
 		public ListViewItemAdapter(Context context, int textViewResourceId, List<CarClass> objects) {
 			super(context, textViewResourceId, objects);
 			layoutInflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
 		}
-		
-		/* ListView‚ÌŠes‚ª•\¦‚·‚é—v‘f‚ğ•Ô‚·ƒƒ\ƒbƒh */
+
+		/* ListViewï¿½ÌŠeï¿½sï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½fï¿½ï¿½Ô‚ï¿½ï¿½ï¿½ï¿½\ï¿½bï¿½h */
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			
+
 			if(convertView == null) {
 				convertView = layoutInflater.inflate(R.layout.listview_item, null);
 			}
-			
+
 			CarClass item = (CarClass)getItem(position);
-			
+
 			ImageView imageView = (ImageView)convertView.findViewById(R.id.imageView_Item);
 			imageView.setImageBitmap( BitmapFactory.decodeResource(getResources(), item.getResourceID()) );
-			
+
 			TextView textView_name = (TextView)convertView.findViewById(R.id.textView_Name);
 			textView_name.setText( item.getName() );
-			
+
 			TextView textView_description = (TextView)convertView.findViewById(R.id.textView_description);
 			textView_description.setText( item.getDescription() );
-			
+
 			return convertView;
 		}
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		Intent intent = getIntent();
 		SelectedMaker = intent.getStringExtra("Maker");
 		SelectedType = intent.getStringExtra("Type");
-		
+
 		//Toast.makeText(this, SelectedMaker, Toast.LENGTH_LONG).show();
-		
+
 		setContentView(R.layout.listview);
-		
-		// listview‚É•\¦‚·‚é—v‘f‚ğassets‚Ìcardata.csv‚©‚çæ“¾‚·‚é
+
+		// listviewï¿½É•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½fï¿½ï¿½assetsï¿½ï¿½cardata.csvï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
 		AssetManager as = getResources().getAssets();
 		List<CarClass> list = new ArrayList<CarClass>();
 		try {
 			InputStream is = as.open("cardata.csv");
-			BufferedReader br = new BufferedReader( new InputStreamReader(is,"Shift_JIS") );
-			
+			BufferedReader br = new BufferedReader( new InputStreamReader(is,"UTF-8") );
+
 			String line;
-			// cardata.csv‚Ì“à—e‚ğ1s‚¸‚Â“Ç‚İ‚Ş
+			// cardata.csvï¿½Ì“ï¿½ï¿½eï¿½ï¿½1ï¿½sï¿½ï¿½ï¿½Â“Ç‚İï¿½ï¿½ï¿½
 			while ( (line = br.readLine()) != null ) {
 				String str[] = line.split(",");
 				String type[] = str[3].split("&");
-				
-				// ‘I‘ğ‚³‚ê‚½ƒ[ƒJ[‚Æƒ^ƒCƒv‚ªu‘I‘ğ‚È‚µv‚Ìê‡@csv‚Ì‘S‚Ä‚ğlist‚ÉƒZƒbƒg
+
+				// ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½[ï¿½Jï¿½[ï¿½Æƒ^ï¿½Cï¿½vï¿½ï¿½ï¿½uï¿½Iï¿½ï¿½ï¿½È‚ï¿½ï¿½vï¿½Ìê‡ï¿½@csvï¿½Ì‘Sï¿½Ä‚ï¿½listï¿½ÉƒZï¿½bï¿½g
 				if ( SelectedMaker.equalsIgnoreCase("---") & SelectedType.equalsIgnoreCase("---") ){
 					int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
 					list.add( new CarClass(strId, str[0], str[4]) );
 				}
-				// ‘I‘ğ‚³‚ê‚½ƒ[ƒJ[‚¾‚¯‚ªu‘I‘ğ‚È‚µv‚Ìê‡ ‘I‘ğ‚³‚ê‚½ƒ^ƒCƒv‚É‡‚¤‚à‚Ì‚¾‚¯‚ğƒŠƒXƒg‚ÉƒZƒbƒg
+				// ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½[ï¿½Jï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½Iï¿½ï¿½ï¿½È‚ï¿½ï¿½vï¿½Ìê‡ ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½^ï¿½Cï¿½vï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½gï¿½ÉƒZï¿½bï¿½g
 				else if ( SelectedMaker.equalsIgnoreCase("---") ) {
 					if ( SelectedType.equalsIgnoreCase(type[0]) || SelectedType.equalsIgnoreCase(type[1]) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
 						list.add( new CarClass(strId, str[0], str[4]) );
 					}
 				}
-				// ‘I‘ğ‚³‚ê‚½ƒ^ƒCƒv‚¾‚¯‚ªu‘I‘ğ‚È‚µv‚Ìê‡ ‘I‘ğ‚³‚ê‚½ƒ[ƒJ[‚É‡‚¤‚à‚Ì‚¾‚¯‚ğƒŠƒXƒg‚ÉƒZƒbƒg
+				// ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½^ï¿½Cï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½Iï¿½ï¿½ï¿½È‚ï¿½ï¿½vï¿½Ìê‡ ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½[ï¿½Jï¿½[ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½gï¿½ÉƒZï¿½bï¿½g
 				else if ( SelectedType.equalsIgnoreCase("---") ) {
 					if ( SelectedMaker.equalsIgnoreCase(str[2]) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
 						list.add( new CarClass(strId, str[0], str[4]) );
 					}
 				}
-				// ƒ[ƒJ[‚àƒ^ƒCƒv‚àw’è‚³‚ê‚Ä‚¢‚éê‡A—¼•û‚É‡‚Á‚½‚à‚Ì‚ğƒŠƒXƒg‚ÉƒZƒbƒg
+				// ï¿½ï¿½ï¿½[ï¿½Jï¿½[ï¿½ï¿½ï¿½^ï¿½Cï¿½vï¿½ï¿½ï¿½wï¿½è‚³ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Aï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½Xï¿½gï¿½ÉƒZï¿½bï¿½g
 				else {
 					if ( SelectedMaker.equalsIgnoreCase(str[2]) & (SelectedType.equalsIgnoreCase(type[0]) || SelectedType.equalsIgnoreCase(type[1])) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
@@ -114,32 +114,32 @@ public class ListViewActivity extends Activity {
 			br.close();
 		} catch (IOException e) {
 		}
-		
+
 		/*
-		// ListView‚É•\¦‚·‚é—v‘f‚ğì¬‚·‚é
+		// ListViewï¿½É•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½fï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½ï¿½
 		List<ListViewItem> list = new ArrayList<ListViewItem>();
 		list.add( new ListViewItem(R.drawable.prius, "prius.jpg", BitmapFactory.decodeResource(getResources(), R.drawable.prius) ));
 		list.add( new ListViewItem(R.drawable.bents, "bents.jpg", BitmapFactory.decodeResource(getResources(), R.drawable.bents) ));
 		list.add( new ListViewItem(R.drawable.mazda, "mazda.jpg", BitmapFactory.decodeResource(getResources(), R.drawable.mazda) ));
 		list.add( new ListViewItem(R.drawable.fit, "fit.jpg", BitmapFactory.decodeResource(getResources(), R.drawable.fit) ));
-		list.add( new ListViewItem(R.drawable.insight, "ƒCƒ“ƒTƒCƒg", BitmapFactory.decodeResource(getResources(), R.drawable.insight) ));
+		list.add( new ListViewItem(R.drawable.insight, "ï¿½Cï¿½ï¿½ï¿½Tï¿½Cï¿½g", BitmapFactory.decodeResource(getResources(), R.drawable.insight) ));
 		*/
-		
+
 		ListViewItemAdapter adapter = new ListViewItemAdapter(this, 0, list);
-		
+
 		ListView listView = (ListView)findViewById(R.id.listView);
-		
+
 		listView.setAdapter(adapter);
-		
+
 		listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				ListView listView = (ListView)parent;
 				CarClass item = (CarClass)listView.getItemAtPosition(position);
-				
+
 				Intent intent = new Intent(ListViewActivity.this, ImageViewActivity.class);
 				intent.putExtra( "Car_item", item );
-				
+
 				startActivity(intent);
 			}
 		});
