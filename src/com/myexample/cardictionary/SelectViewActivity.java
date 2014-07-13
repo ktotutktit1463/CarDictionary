@@ -23,6 +23,7 @@ public class SelectViewActivity extends Activity {
         Spinner spinner1 = (Spinner)this.findViewById(R.id.spinner1);
         Spinner spinner2 = (Spinner)this.findViewById(R.id.spinner2);
         
+        
         spinner1.setOnItemSelectedListener(new OnItemSelectedListener(){  
             //Spinner�̃h���b�v�_�E���A�C�e�����I�����ꂽ��  
             public void onItemSelected(AdapterView<?> parent, View view, int arg2, long arg3) {  
@@ -44,14 +45,17 @@ public class SelectViewActivity extends Activity {
             //Spinner�̃h���b�v�_�E���A�C�e�����I������Ȃ�������  
             public void onNothingSelected(AdapterView<?> parent) {  
             }});  
+            
 	}
 
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.select_view, menu);
 		return true;
 	}
+	
 	
 	/* Search�{�^���N���b�N���ɌĂяo����郁�\�b�h */
 	public void OnClick(View v) {

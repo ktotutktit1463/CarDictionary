@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
 <string-array name="maker">
  <item>---</item>
  <item>トヨタ</item>
@@ -9,11 +9,14 @@
  <item>メルセデスベンツ</item>
 </string-array>
 
-<string-array name="type">  
+<string-array name="type">
  <item>---</item>
  <item>セダン</item>
  <item>ハイブリッド</item>
  <item>コンパクト</item>
+ <item>SUV</item>
+ <item>ワゴン</item>
+ <item>軽自動車</item>
 </string-array>
-    
+
 </resources>
