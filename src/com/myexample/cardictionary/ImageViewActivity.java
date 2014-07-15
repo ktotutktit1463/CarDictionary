@@ -41,11 +41,8 @@ public class ImageViewActivity extends Activity {
 	        adapter.add(Color.YELLOW);
 
 	        // ViewPager を生成
-	        ViewPager viewPager = new ViewPager(this);
+	        ViewPager viewPager = (ViewPager)findViewById(R.id.ViewPager);
 	        viewPager.setAdapter(adapter);
-
-	        // レイアウトにセット
-	        setContentView(viewPager);
 		}
 
 	}
