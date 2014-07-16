@@ -27,10 +27,12 @@ public final class R {
     public static final class drawable {
         public static final int bents=0x7f020000;
         public static final int fit=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int insight=0x7f020003;
-        public static final int mazda=0x7f020004;
-        public static final int prius=0x7f020005;
+        public static final int fit_1=0x7f020002;
+        public static final int fit_2=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int insight=0x7f020005;
+        public static final int mazda=0x7f020006;
+        public static final int prius=0x7f020007;
     }
     public static final class id {
         public static final int ViewPager=0x7f090001;

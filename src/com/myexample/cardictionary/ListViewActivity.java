@@ -87,27 +87,27 @@ public class ListViewActivity extends Activity {
 				// �I�����ꂽ���[�J�[�ƃ^�C�v���u�I���Ȃ��v�̏ꍇ�@csv�̑S�Ă�list�ɃZ�b�g
 				if ( SelectedMaker.equalsIgnoreCase("---") & SelectedType.equalsIgnoreCase("---") ){
 					int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-					list.add( new CarClass(strId, str[0], str[4]) );
+					list.add( new CarClass(strId, str[0], str[1], str[4]) );
 				}
 				// �I�����ꂽ���[�J�[�������u�I���Ȃ��v�̏ꍇ �I�����ꂽ�^�C�v�ɍ������̂��������X�g�ɃZ�b�g
 				else if ( SelectedMaker.equalsIgnoreCase("---") ) {
 					if ( SelectedType.equalsIgnoreCase(type[0]) || SelectedType.equalsIgnoreCase(type[1]) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-						list.add( new CarClass(strId, str[0], str[4]) );
+						list.add( new CarClass(strId, str[0], str[1], str[4]) );
 					}
 				}
 				// �I�����ꂽ�^�C�v�������u�I���Ȃ��v�̏ꍇ �I�����ꂽ���[�J�[�ɍ������̂��������X�g�ɃZ�b�g
 				else if ( SelectedType.equalsIgnoreCase("---") ) {
 					if ( SelectedMaker.equalsIgnoreCase(str[2]) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-						list.add( new CarClass(strId, str[0], str[4]) );
+						list.add( new CarClass(strId, str[0], str[1], str[4]) );
 					}
 				}
 				// ���[�J�[���^�C�v���w�肳��Ă���ꍇ�A����ɍ��������̂����X�g�ɃZ�b�g
 				else {
 					if ( SelectedMaker.equalsIgnoreCase(str[2]) & (SelectedType.equalsIgnoreCase(type[0]) || SelectedType.equalsIgnoreCase(type[1])) ) {
 						int strId = getResources().getIdentifier(str[1], "drawable", getPackageName() );
-						list.add( new CarClass(strId, str[0], str[4]) );
+						list.add( new CarClass(strId, str[0], str[1], str[4]) );
 					}
 				}
 			}
