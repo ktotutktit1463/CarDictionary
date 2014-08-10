@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
+/* 車の詳細情報を表示するアクティビティ */
 public class ImageViewActivity extends Activity {
 
 	@Override
@@ -13,6 +14,7 @@ public class ImageViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.imageview);
 
+		/* intentから表示対象のCarClassを取得する */
 		CarClass CarItem = (CarClass)getIntent().getSerializableExtra("Car_item");
 
 		if (CarItem.getResourceID() != 0) {
@@ -25,9 +27,11 @@ public class ImageViewActivity extends Activity {
 
 			// カスタム PagerAdapter を生成
 	        CustomPagerAdapter adapter = new CustomPagerAdapter(this);
-	        adapter.add(CarItem.getResourceID());	// メインの画像を1枚目にセット
 
-	        // 2枚目以降の画像があればセットする
+	        // 画像をセット
+	        adapter.add(CarItem.getResourceID());
+
+	        // 2枚目以降の画像があれば動的にセットする
 	        char i = '2';
 	        int NextImageID = getResources().getIdentifier(CarItem.getresourceName() + '_' + '1', "drawable", getPackageName());
 	        while( NextImageID != 0 ) {
