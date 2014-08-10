@@ -6,6 +6,11 @@
  <item>トヨタ</item>
  <item>マツダ</item>
  <item>ホンダ</item>
+ <item>日産</item>
+ <item>三菱</item>
+ <item>スズキ</item>
+ <item>ダイハツ</item>
+ <item>スバル</item>
  <item>メルセデスベンツ</item>
 </string-array>
 
@@ -16,7 +21,10 @@
  <item>コンパクト</item>
  <item>SUV</item>
  <item>ワゴン</item>
- <item>軽自動車</item>
+ <item>軽</item>
+ <item >クーペ</item>
+ <item >オープン</item>
+ <item >ステーションワゴン</item>
 </string-array>
 
 </resources>
