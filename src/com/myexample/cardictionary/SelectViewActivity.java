@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
 
+/* アプリ起動時に表示されるアクティビティ */
 public class SelectViewActivity extends Activity {
 
 	private String SelectedMaker;
@@ -19,7 +20,9 @@ public class SelectViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.selectview);
 
+		// メーカー選択用のスピナー
         Spinner spinner1 = (Spinner)this.findViewById(R.id.spinner1);
+        // タイプ選択用のスピナ―
         Spinner spinner2 = (Spinner)this.findViewById(R.id.spinner2);
 
 
@@ -52,10 +55,12 @@ public class SelectViewActivity extends Activity {
 
 	// Searchボタンが押された時
 	public void OnClick(View v) {
+		// intentの設定
 		Intent intent = new Intent(SelectViewActivity.this, ListViewActivity.class);
 		intent.putExtra("Maker", SelectedMaker);
 		intent.putExtra("Type", SelectedType);
 
+		// ListViewActivityの起動
 		startActivity(intent);
 	}
 
